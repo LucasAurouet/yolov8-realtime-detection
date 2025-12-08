@@ -13,16 +13,12 @@ def draw_boxes(frame, boxes):
             x1, y1, x2, y2 = map(int, box)
             # Draw the box
             color = (0,255,0)
-            cv2.rectangle(frame, (x1,y1), (x2,y2), color, 1)
+            cv2.rectangle(frame, (x1,y1), (x2,y2), color, 2)
             cv2.putText(frame, f"{label}:{conf:.2f}", (x1, y1-5),
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, color, 1)
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
         # Show the image 
         cv2.imshow('video', frame)
-        
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
 
 def read_stream(model=None):
 
