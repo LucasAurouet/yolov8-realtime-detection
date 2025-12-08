@@ -1,4 +1,6 @@
 import cv2
+from ultralytics import YOLO
+import torch
 
 def inference(model, frame):
 
@@ -21,7 +23,7 @@ def draw_boxes(frame, boxes, probas):
         # Show the image 
         cv2.imshow('video', frame)
 
-def read_stream(model, show_boxes):
+def read_stream(model=None):
 
     stream = cv2.VideoCapture(0)
 
@@ -36,10 +38,8 @@ def read_stream(model, show_boxes):
             print('invalid stream')
             break
         
-        if model:
+        if model != None:
             boxes, probas = inference(model, frame)
-            
-        if show_boxes:
             draw_boxes(frame, boxes, probas)
         else:    
             cv2.imshow('video', frame)
@@ -50,3 +50,9 @@ def read_stream(model, show_boxes):
     stream.release()
     cv2.destroyAllWindows()
     print(f'{fps} FPS')
+    
+model = YOLO('D:\\yolov8-realtime-detection\\weights\\finetuned_weights.pt')
+model.to("cuda")
+model.half()
+
+read_stream(model=None)
