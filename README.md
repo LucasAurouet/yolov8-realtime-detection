@@ -16,21 +16,16 @@ The project is designed as a **minimal working example** for experimenting with 
 
 ```
 yolov8-realtime-detection/
-|
-|-- src/
-|   |-- fine_tune.py        
-|   `-- video_output.py   
-|
-|-- notebooks/
-|   |-- yolov8-finetune.ipynb   
-|   `-- yolov8-realtime.ipynb  
-|
-|-- weights/
-|   `-- finetuned_weights.pt
-|
-|-- requirements.txt
-|
-`-- README.md
+├─ notebooks/
+│  ├─ yolov8-finetune.ipynb
+│  ├─ yolov8-realtime.ipynb
+├─ src/
+│  ├─ fine_tune.py
+│  ├─ video_output.py
+├─ .gitignore
+├─ requirements.txt
+├─ README.md
+
 ```
 
 ---
