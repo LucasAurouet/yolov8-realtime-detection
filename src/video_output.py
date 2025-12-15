@@ -6,19 +6,16 @@ def inference(model, frame):
 
     results = model(frame)    
 
-    return results[0].boxes, results[0].probs
+    return results[0].boxes
 
-def draw_boxes(frame, boxes, probas):
-        for box in boxes:
-            x1, y1, x2, y2 = boxes.xyxy
-            conf = boxes.conf
-            # Class and confidence for the current cell
-            class_id = probas.argmax().item()
+def draw_boxes(frame, boxes):
+        for box, conf, label in zip(boxes.xyxy, boxes.conf, boxes.cls):
+            x1, y1, x2, y2 = map(int, box)
             # Draw the box
             color = (0,255,0)
-            cv2.rectangle(frame, (x1,y1), (x2,y2), color, 1)
-            cv2.putText(frame, f"{class_id}:{conf:.2f}", (x1, y1-5),
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, color, 1)
+            cv2.rectangle(frame, (x1,y1), (x2,y2), color, 2)
+            cv2.putText(frame, f"{label}:{conf:.2f}", (x1, y1-5),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
         # Show the image 
         cv2.imshow('video', frame)
@@ -39,20 +36,23 @@ def read_stream(model=None):
             break
         
         if model != None:
-            boxes, probas = inference(model, frame)
-            draw_boxes(frame, boxes, probas)
+            boxes = inference(model, frame)
+            draw_boxes(frame, boxes)
         else:    
             cv2.imshow('video', frame)
         
         if cv2.waitKey(1) == ord('q'):
-            break
-        
+            break  
     stream.release()
     cv2.destroyAllWindows()
     print(f'{fps} FPS')
     
-model = YOLO('D:\\yolov8-realtime-detection\\weights\\finetuned_weights.pt')
+model = YOLO('C:\\Users\\Lucas\\Desktop\\yolov8-realtime-detection\\weights\\finetuned_weights.pt')
 model.to("cuda")
-model.half()
+# model.half()
 
-read_stream(model=None)
+# img_test = cv2.imread("C:\\Users\\Lucas\\Desktop\\yolov8-realtime-detection\\carte.jpg")
+# results = model(img_test)
+# draw_boxes(img_test, results[0].boxes)
+
+read_stream(model=model)
