@@ -17,35 +17,35 @@ The project is designed as a **minimal working example** for experimenting with 
 ```
 yolov8-realtime-detection/
 
-│
+|
 
-├── src/
+|-- src/
 
-│   ├── fine\_tune.py        # YOLOv8 loading and fine-tuning utilities 
+|   |-- fine_tune.py        # YOLOv8 loading and fine-tuning utilities 
 
-│   └── video\_output.py    # # Real-time webcam inference with CUDA / FP16 support
+|   `-- video_output.py    # # Real-time webcam inference with CUDA / FP16 support
 
-│
+|
 
-├── notebooks/
+|-- notebooks/
 
-│   ├── yolov8-finetune.ipynb   # Fine-tuning on a custom dataset (Kaggle)
+|   |-- yolov8-finetune.ipynb   # Fine-tuning on a custom dataset (Kaggle)
 
-│   └── yolov8-realtime.ipynb  # Real-time inference using trained weights
+|   `-- yolov8-realtime.ipynb  # Real-time inference using trained weights
 
-│
+|
 
-├── weights/
+|-- weights/
 
-│   └── finetuned\_weights.pt    # Example fine-tuned model weights
+|   `-- finetuned_weights.pt    # Example fine-tuned model weights
 
-│
+|
 
-├── requirements.txt
+|-- requirements.txt
 
-│
+|
 
-└── README.md
+`-- README.md
 
 ```
 
